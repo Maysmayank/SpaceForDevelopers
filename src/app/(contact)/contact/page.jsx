@@ -1,0 +1,18 @@
+import AboutMe from '@/components/AboutMe';
+import ContactForm from '@/components/ContactForm';
+import React from 'react';
+
+export default function Page() {
+//   async function handelSubmit(event) {
+//     event.preventDefault(); // Prevent default form submission behavior
+//     console.log("Form submitted!");
+//     // Perform additional logic, such as sending data to the backend
+//   }
+
+  return (
+    <div className="flex flex-col items-center justify-center bg-[#37424d] py-20 min-h-[50%] ">
+      <AboutMe/>
+      <ContactForm/>
+    </div>
+  );
+}
