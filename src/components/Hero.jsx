@@ -30,7 +30,7 @@ const HeroSection = () => {
       </div>
 
       {/* Glass Sheet with Code Snippet */}
-      <div className="glass-sheet  mt-4 md:mt-40 md:mr-60 w-[423px] md:min-w-[500px] m-auto">
+      <div className="glass-sheet  mt-4 md:mt-40 md:mr-60 w-[415px] md:min-w-[500px] m-auto">
       <pre className="text">print("Welcome to space for developers")</pre>
       </div>
     </section>

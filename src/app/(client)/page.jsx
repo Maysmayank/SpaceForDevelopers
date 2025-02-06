@@ -25,6 +25,8 @@ export default function Page() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
+        console.log("intersection");
+        
         if (entry.isIntersecting) {
           openModal(); // Open modal when WhyChooseUs is in view
         }
@@ -49,15 +51,13 @@ export default function Page() {
       {isModalOpen && <LoginModal closeModal={closeModal} />}
       <HeroSection />
       <Pictures />
+
       <FeaturedPrograms />
       {/* Attach the ref to WhyChooseUs */}
-        <WhyChooseUs />
-        <div ref={whyChooseUsRef}>
-
+      <WhyChooseUs  />
+      <div ref={whyChooseUsRef}></div>
       <LatestUpdates />
-      </div>
       <OurPurpose />
-      <OurStoryValues />
     </div>
   );
 }
