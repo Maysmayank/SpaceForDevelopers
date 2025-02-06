@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const OurPurpose = () => {
   return (
-    <div id='about' className="  px-20 py-12 bg-[#181818]  ">
+    <div id='about' className=" px-4 md:px-20 py-12 bg-[#181818]  ">
       {/* Our Purpose Section */}
       <div className="section flex flex-col gap-0" id="our-purpose">
         <h2 className="text-3xl font-semibold  text-center" >Our Purpose</h2>

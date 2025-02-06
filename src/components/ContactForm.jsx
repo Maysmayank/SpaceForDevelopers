@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 function ContactForm() {
@@ -11,8 +12,10 @@ function ContactForm() {
   
 
   return (
+    <>
     <div className="mt-20 get-in-touch w-full flex flex-col  items-center">
       <h2 className="title">Get in Touch</h2>
+      
       <form
         action="/contact"
         className="w-[70%] flex flex-col gap-8"
@@ -50,8 +53,23 @@ function ContactForm() {
         </div>
         <button type="submit">Get in Touch</button>
       </form>
+
+      <div className='flex flex-col md:flex-row gap-4 m-auto text-md items-center justify-evenly text-blue-400 font-semibold mt-20'>
+      <h1>
+      +91-8595926617
+      </h1>
+      
+      <Link href={'/www.linkedin.com/in/siddhant-sharma-41a723338'}>LinkedIn</Link>
+
+      <h1>siddhantsharma2828@gmail.com</h1>
+    </div>
       
     </div>
+
+
+
+    </>
+
   );
 }
 

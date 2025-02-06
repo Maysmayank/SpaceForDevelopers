@@ -8,33 +8,56 @@ import OurPurpose from '@/components/OurPurpose'
 import OurStoryValues from '@/components/OurStoryValues'
 import Pictures from '@/components/Pictures'
 import WhyChooseUs from '@/components/WhyChooseUs'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
-export default function page() {
-  let [isModalOpen,setIsModalOpen]=useState(false)
+export default function Page() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const whyChooseUsRef = useRef(null); // Reference for WhyChooseUs section
 
-  function openModal(){
-    setIsModalOpen(true)
+  function openModal() {
+    setIsModalOpen(true);
   }
 
-  function closeModal(){
-    setIsModalOpen(false)
+  function closeModal() {
+    setIsModalOpen(false);
   }
-  return (
 
-    <div>
-      <Header openModal={openModal}/>
-      {
-        isModalOpen&& <LoginModal closeModal={closeModal}/>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          openModal(); // Open modal when WhyChooseUs is in view
+        }
+      },
+      { threshold: 0.5 } // Trigger when 50% of the element is visible
+    );
+
+    if (whyChooseUsRef.current) {
+      observer.observe(whyChooseUsRef.current);
+    }
+
+    return () => {
+      if (whyChooseUsRef.current) {
+        observer.unobserve(whyChooseUsRef.current);
       }
-      <HeroSection/>
-      <Pictures/>
-      <FeaturedPrograms/>
-      <WhyChooseUs/>
-      <LatestUpdates/>
-      <OurPurpose/>
-      <OurStoryValues/>
-    </div>
-  )
-}
+    };
+  }, []);
 
+  return (
+    <div>
+      <Header openModal={openModal} />
+      {isModalOpen && <LoginModal closeModal={closeModal} />}
+      <HeroSection />
+      <Pictures />
+      <FeaturedPrograms />
+      {/* Attach the ref to WhyChooseUs */}
+        <WhyChooseUs />
+        <div ref={whyChooseUsRef}>
+
+      <LatestUpdates />
+      </div>
+      <OurPurpose />
+      <OurStoryValues />
+    </div>
+  );
+}

@@ -4,8 +4,8 @@ import Image from 'next/image';
 
 function Pictures() {
     return (
-        <div className="hero-image">
-            <div className="coding-illustration">
+        <div className="hero-image relative  -top-[50px]">
+            <div className="coding-illustration -z-1">
                 {/* Programming Language/Tech Logos */}
                 <Image src="/images/html5.svg" className="floating-logo" alt="HTML5" width={50} height={50} />
                 <Image src="/images/css3.svg" className="floating-logo" alt="CSS3" width={50} height={50} />

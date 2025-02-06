@@ -1,138 +1,121 @@
 'use client';
 import React, { useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
 
 const LoginModal = ({ closeModal }) => {
-  const [activeTab, setActiveTab] = useState('login'); // Track active tab (login/signup)
+  const [activeTab, setActiveTab] = useState('login');
 
   return (
     <>
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black bg-opacity-50 z-40"
+        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md z-40"
         onClick={closeModal}
       ></div>
 
       {/* Modal Content */}
       <div className="fixed inset-0 flex justify-center items-center z-50">
         <div
-          className="bg-white w-[400px] md:w-[540px] md:h-[450px] rounded-lg shadow-lg p-6 relative"
-          style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(30px)',
-          }}
-          onClick={(e) => e.stopPropagation()} // Prevent backdrop click from closing the modal
+          className="w-[400px] md:w-[540px] md:h-[480px] rounded-xl shadow-xl p-4 relative overflow-hidden"
+          style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(30px)' }}
+          onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
           <button
-            className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl"
+            className="absolute top-5 right-6 text-white text-3xl hover:text-red-500 transition-all"
             onClick={closeModal}
           >
-            &times;
+            <FaTimes />
           </button>
 
           {/* Tabs */}
-          <ul className="flex  justify-center gap-10 border-b mb-4 mt-6">
-            <li
-              className={`cursor-pointer  text-center py-2 rounded-t-lg ${
-                activeTab === 'login'
-                  ? ' text-blue-600'
-                  : 'text-white text-gray-600'
+          <div className="flex justify-center gap-10 border-b mb-6 mt-6">
+            <button
+              className={`text-xl font-semibold py-2 transition-all border-b-2 ${
+                activeTab === 'login' ? 'text-white border-white' : 'text-blue-700 border-transparent hover:border-blue-500'
               }`}
               onClick={() => setActiveTab('login')}
             >
               Login
-            </li>
-            <li
-              className={`cursor-pointer  text-center py-2 rounded-t-lg ${
-                activeTab === 'signup'
-                  ? ' text-blue-500'
-                  : ' text-gray-600 text-white'
+            </button>
+            <button
+              className={`text-xl font-semibold py-2 transition-all border-b-2 ${
+                activeTab === 'signup' ? 'text-white border-white' : 'text-blue-700 border-transparent hover:border-blue-500'
               }`}
               onClick={() => setActiveTab('signup')}
             >
               Signup
-            </li>
-          </ul>
+            </button>
+          </div>
 
           {/* Form Content */}
           <div>
             {activeTab === 'login' && (
-              <form id="login-form">
+              <form id="login-form" className="space-y-4">
                 <input
                   type="email"
                   placeholder="Email"
-                  className="bg-[#4b4b4b] w-full p-2 mb-4 rounded-lg"
+                  className="bg-[#4b4b4b] text-white w-full p-3 rounded-lg outline-none"
                   required
                 />
                 <input
                   type="password"
                   placeholder="Password"
-                  className="bg-[#4b4b4b] w-full p-2 mb-4 rounded-lg"
+                  className="bg-[#4b4b4b] text-white w-full p-3 rounded-lg outline-none"
                   required
                 />
-                <div className="flex flex-col gap-4">
-                  <button
-                    type="submit"
-                    className="bg-[#5333dc] text-white w-full py-2 rounded-lg"
-                  >
-                    Login
+                <button
+                  type="submit"
+                  className="bg-gradient-to-r from-[#20002c] to-[#6f00ff] hover:opacity-90 text-white w-full py-3 rounded-lg font-semibold transition-all"
+                >
+                  Login
+                </button>
+                <div className="flex flex-col gap-3">
+                  <button className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#20002c] to-[#6f00ff] hover:scale-105 transition-all text-white py-3 rounded-lg">
+                    <FcGoogle size={20} /> Login with Google
                   </button>
-
-                  <button
-                    type="button"
-                    className="bg-[#4285f4] text-white w-full py-2 rounded-lg"
-                  >
-                    Login with Google
-                  </button>
-                  
-                  <button
-                    type="button"
-                    className="bg-[#4285f4] text-white w-full py-2 rounded-lg"
-                  >
-                    Login with Github
+                  <button className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#20002c] to-[#6f00ff] hover:scale-105 transition-all text-white py-3 rounded-lg">
+                    <FaGithub size={20} /> Login with Github
                   </button>
                 </div>
               </form>
             )}
 
+
             {activeTab === 'signup' && (
-              <form id="signup-form">
+              <form id="signup-form" className="space-y-4">
                 <input
                   type="text"
                   placeholder="Name"
-                  className="bg-[#4b4b4b] w-full p-2 mb-4 rounded-lg"
+                  className="bg-[#4b4b4b] text-white w-full p-3 rounded-lg outline-none"
                   required
                 />
                 <input
                   type="email"
                   placeholder="Email"
-                  className="bg-[#4b4b4b] w-full p-2 mb-4 rounded-lg"
+                  className="bg-[#4b4b4b] text-white w-full p-3 rounded-lg outline-none"
                   required
                 />
                 <input
                   type="password"
                   placeholder="Password"
-                  className="bg-[#4b4b4b] w-full p-2 mb-4 rounded-lg"
+                  className="bg-[#4b4b4b] text-white w-full p-3 rounded-lg outline-none"
                   required
                 />
-                <div className="flex flex-col gap-2">
-                  <button
-                    type="submit"
-                    className="bg-green-500 text-white w-full py-2 rounded-lg"
-                  >
-                    Signup
+                <button
+                  type="submit"
+                  className="bg-gradient-to-r from-[#20002c] to-[#6f00ff] hover:opacity-90 text-white w-full py-3 rounded-lg font-semibold transition-all"
+                >
+                  Signup
+                </button>
+                <div className="flex flex-col gap-3">
+                  <button className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#20002c] to-[#6f00ff] hover:scale-105 transition-all text-white py-3 rounded-lg">
+                    <FcGoogle size={20} /> Signup with Google
                   </button>
-                  <button
-                    type="button"
-                    className="bg-red-500 text-white w-full py-2 rounded-lg"
-                  >
-                    Signup with Google
-                  </button>
-                  <button
-                    type="button"
-                    className="bg-gray-800 text-white w-full py-2 rounded-lg"
-                  >
-                    Signup with Github
+                  <button className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#20002c] to-[#6f00ff] hover:scale-105 transition-all text-white py-3 rounded-lg">
+                    <FaGithub size={20} /> Signup with Github
                   </button>
                 </div>
               </form>
