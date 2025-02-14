@@ -1,15 +1,13 @@
 "use client";
 import React from "react";
-
+import { FlipWords } from "../components/ui/filp-words";
 const HeroSection = () => {
   return (
-    <section className="flex pt-10 flex-col items-center md:flex-row md:justify-between md:mt-10 md:pl-10">
+    <section className="flex  z-10 pt-14 flex-col items-center md:flex-row md:justify-between md:mt-10 md:pl-16">
       {/* Hero Content */}
-      <div className="hero-content p-8 text-center md:text-left md:max-w-lg md:min-w-[60%]">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-          Welcome to <span className="text-blue-600">Space for Developers</span>
-        </h1>
-        <p className="mt-4 text-lg text-gray-600">
+      <div className="hero-content z-10 p-8 text-center pt-28 flex flex-col items-start md:text-left md:max-w-lg md:min-w-[60%]">
+        <FlipWordsDemo/>
+        <p className="mt-8 font-semibold text-lg text-white">
           Embark on your coding journey with expert guidance and hands-on learning.
         </p>
 
@@ -30,7 +28,7 @@ const HeroSection = () => {
       </div>
 
       {/* Glass Sheet with Code Snippet */}
-      <div className="glass-sheet  mt-4 md:mt-40 md:mr-60 w-[415px] md:min-w-[500px] m-auto">
+      <div className="glass-sheet z-10  md:mt-50 md:mr-60 w-[415px] md:min-w-[500px] m-auto">
       <pre className="text">print("Welcome to space for developers")</pre>
       </div>
     </section>
@@ -38,3 +36,18 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
+export function FlipWordsDemo() {
+  const words = ["Space", "cute", "beautiful", "modern"];
+
+  return (
+    <div className="flex justify-center items-center ">
+      <div className="text-2xl md:text-6xl abel-regular">
+        Welcome to
+        <FlipWords words={words} /> <br />
+        For Developers
+      </div>
+    </div>
+  );
+}

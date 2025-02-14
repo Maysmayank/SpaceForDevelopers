@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 function Pictures() {
     return (
-        <div className="hero-image relative  -top-[50px]">
+        <div className="hero-image relative  opacity-50 -z-1 -top-[250px]">
             <div className="coding-illustration -z-1">
                 {/* Programming Language/Tech Logos */}
                 <Image src="/images/html5.svg" className="floating-logo" alt="HTML5" width={50} height={50} />

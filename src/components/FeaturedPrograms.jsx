@@ -3,9 +3,10 @@ import React from 'react';
 
 const FeaturedPrograms = () => {
   return (
-    <section className="featured-programs" id="programs">
-      <h2 className='text-slate-600 font-bold text-3xl'>Popular Learning Paths</h2>
-      <div className="program-cards text-black">
+    <section className=" flex flex-col" id="programs">
+      <h2 className='text-white text-center md:py-16  font-bold text-4xl'>Popular Learning Paths</h2>
+      
+      <div className="program-cards  text-white">
         <div className="program-card">
           <div className="program-icon">🌐</div>
           <h3 className='text-xl font-semibold'>BlockChain</h3>

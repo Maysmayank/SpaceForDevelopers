@@ -3,8 +3,8 @@ import React from 'react';
 
 const WhyChooseUs = () => {
   return (
-    <section className="why-choose-us py-16 px-8 bg-gray-100 text-center text-black">
-      <h2 className="text-4xl font-bold mb-8">Why Choose Space for Developers?</h2>
+    <section className=" py-16 mt-10  px-8 text-center text-black">
+      <h2 className="text-4xl text-white font-bold mb-8">Why Choose Space for Developers?</h2>
       <div className="features-grid flex justify-center gap-8 flex-wrap">
         <div className="feature bg-white p-8 rounded-lg shadow-lg w-72 text-center transform transition-transform duration-300 hover:translate-y-[-10px] hover:shadow-xl">
           <span className="feature-icon text-5xl mb-4 text-blue-600">🎯</span>
