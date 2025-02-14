@@ -4,8 +4,7 @@ import React from 'react'
 
 function page() {
   return (
-    
-      <PythonForm/>
+    <>Form </>
   )
 }
 

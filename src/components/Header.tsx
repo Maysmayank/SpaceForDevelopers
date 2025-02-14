@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const Header = ({ openModal }) => {
+const Header = ({ openModal }:any) => {
 
   return (
       <nav className="bg-gray-900 w-full text-white p-4">
