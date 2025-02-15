@@ -2,16 +2,16 @@
 import FeaturedPrograms from '@/components/FeaturedPrograms'
 import Header from '@/components/Header'
 import HeroSection from '@/components/Hero'
-import LatestUpdates from '@/components/LatestUpdates'
+import LatestUpdates from '../../components/LatestUpdates'
 import LoginModal from '@/components/LoginModal'
 import OurPurpose from '@/components/OurPurpose'
-import OurStoryValues from '@/components/OurStoryValues'
+import {OurStoryValues} from '@/components/OurStoryValues'
 import Pictures from '@/components/Pictures'
-import WhyChooseUs from '@/components/WhyChooseUs'
+import WhyChooseUs from '../../components/WhyChooseUs'
 import React, { useState, useEffect, useRef } from 'react'
 import AnimatedTestimonials from "@/components/ui/animated-testimonials";
 import { Meteors } from '@/components/ui/meteors'
-
+import KeyFeatures from '../../components/KeyFeatures'
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const whyChooseUsRef = useRef(null); // Reference for WhyChooseUs section
@@ -55,13 +55,10 @@ export default function Page() {
       <div className='md:h-[710px] relative'>
       <HeroSection />
       <Pictures />
-
       </div>
      
-
-
-      <div className='bg-black relative'>
-      <Meteors number={30} /> 
+      <div className='bg-[#13161a] flex flex-col gap-16 relative '>
+      <Meteors  number={30} /> 
         <FeaturedPrograms />
         {/* Attach the ref to WhyChooseUs */}
         <WhyChooseUs />
@@ -69,11 +66,16 @@ export default function Page() {
         {/* <div ref={whyChooseUsRef}></div> */}
         <LatestUpdates />
         <OurPurpose />
+        <KeyFeatures/>
+        <OurStoryValues/>
       </div>
 
     </div>
   );
 }
+
+
+
 
  function AnimatedTestimonialsDemo() {
   const testimonials = [
