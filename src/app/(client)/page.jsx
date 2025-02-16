@@ -10,8 +10,7 @@ import Pictures from '@/components/Pictures'
 import WhyChooseUs from '../../components/WhyChooseUs'
 import React, { useState, useEffect, useRef } from 'react'
 import AnimatedTestimonials from "@/components/ui/animated-testimonials";
-import { Meteors } from '@/components/ui/meteors'
-import KeyFeatures from '../../components/KeyFeatures'
+
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const whyChooseUsRef = useRef(null); // Reference for WhyChooseUs section
@@ -54,19 +53,15 @@ export default function Page() {
       
       <div className='md:h-[710px] relative'>
       <HeroSection />
-      <Pictures />
       </div>
      
       <div className='bg-[#13161a] flex flex-col gap-16 relative '>
-      <Meteors  number={30} /> 
-        <FeaturedPrograms />
         {/* Attach the ref to WhyChooseUs */}
         <WhyChooseUs />
         <AnimatedTestimonialsDemo/>
         {/* <div ref={whyChooseUsRef}></div> */}
         <LatestUpdates />
         <OurPurpose />
-        <KeyFeatures/>
         <OurStoryValues/>
       </div>
 

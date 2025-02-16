@@ -11,7 +11,7 @@ const StarryBackground = () => {
 
     // Renderer setup
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000022, 1);
+    renderer.setClearColor(0x000000, 1); // Set background to black (0x000000)
 
     // Camera setup
     camera.position.z = 10;
@@ -60,7 +60,7 @@ const StarryBackground = () => {
     };
   }, []);
 
-  return <canvas id="starry-background" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',zIndex:'-1' }} />;
+  return <canvas id="starry-background" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: '-1' }} />;
 };
 
 export default StarryBackground;

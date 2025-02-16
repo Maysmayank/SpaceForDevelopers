@@ -1,16 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Knewave&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Lilita+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Playwrite+IN:wght@100..400&family=Rubik+Spray+Paint&family=Rubik:ital,wght@0,300..900;1,300..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.shimmer-bg {
+  background: linear-gradient(110deg, #000103 45%, #1e2631 55%, #000103);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy-Medium.ttf") format("truetype");
+  font-weight: 500; /* Medium weight */
+  font-style: normal;
+}
+
 .abel-regular {
   font-family: "Abel", serif;
   font-weight: 800;
   color:white;
   font-style: normal;
+}
+.lobster-regular {
+  font-family: "Lobster", cursive;
+  font-weight: 500;
+  font-style: normal;
+}
+.knewave-regular {
+  font-family: "Knewave", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -38,20 +73,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* glass sheet styles */
-.glass-sheet {
-  height: auto; /* Automatically adjust based on content */
-  padding: 20px;
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
 
