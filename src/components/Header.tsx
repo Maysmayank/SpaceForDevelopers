@@ -19,12 +19,12 @@ const Header = ({ openModal }: any) => {
 
   return (
     <nav
-      className={`fixed pt-4 top-0 left-0 w-full z-[1000] transition-all duration-300
+      className={`fixed pt-2 md:pt-4 top-0 left-0 w-full z-[1000] transition-all duration-300
       bg-[#21262c] bg-opacity-60 backdrop-blur-md`}
     >
       <div className="container mx-auto h-[60px] flex justify-between px-10 md:px-20 items-center relative">
         {/* Logo */}
-        <h1 className="text-3xl text-white italic font-extrabold knewave-regular">
+        <h1 className="text-xl md:text-3xl text-white italic font-extrabold knewave-regular">
           Space for Developers
         </h1>
 
@@ -40,11 +40,13 @@ const Header = ({ openModal }: any) => {
               Courses
             </Link>
           </li>
+
           <li>
             <Link href="/contact" className="hover:text-gray-400 text-white">
               Contact
             </Link>
           </li>
+          
           <li>
             <Link href="/community" className="hover:text-gray-400 text-white">
               <ShimmerButton label='Community'/>

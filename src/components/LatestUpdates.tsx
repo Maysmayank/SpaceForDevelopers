@@ -6,7 +6,7 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const LatestUpdates = () => {
   return (
-    <div className='  w-[80%] flex flex-col m-auto items-center gap-20'>
+    <div className='w-[88%] py-10 md:py-10 md:w-[80%] flex flex-col m-auto items-center md:gap-16 gap-10'>
         <h1 className='text-4xl font-bold '>Latest Updates</h1>
        <GlowingEffectDemoSecond/>
 
@@ -19,7 +19,7 @@ export default LatestUpdates;
 
 export function GlowingEffectDemoSecond() {
   return (
-    <ul className="grid grid-cols-1 w-full  md:gap-10 md:grid-cols-2 md:grid-rows-2 ">
+    <ul className="grid grid-cols-1 w-full gap-10 md:grid-cols-2 md:grid-rows-2 ">
       <GridItem
         imageSrc={'/images/python.jpg'}
         title="Python Programming Language"
@@ -68,7 +68,7 @@ const GridItem = ({ imageSrc, title, description }: GridItemProps) => {
 
   return (
     <li className="min-h-[14rem] list-none">
-      <div className="relative h-full rounded-2.5xl border p-0 shadow-lg md:rounded-2xl">
+      <div className="relative h-full rounded-md  border p-0 shadow-lg md:rounded-md">
         {/* Glowing Effect */}
         <GlowingEffect
           blur={1}
@@ -81,13 +81,13 @@ const GridItem = ({ imageSrc, title, description }: GridItemProps) => {
         />
 
         {/* Image at the top */}
-        <div className="relative w-full h-[300px] overflow-hidden">
+        <div className="relative w-full h-[200px] md:h-[300px] overflow-hidden">
           <Image
             alt="image"
             src={imageSrc}
             layout="fill"
             objectFit="cover"
-            className="transform rounded-tr-2xl rounded-tl-2xl transition-transform duration-300 ease-in-out"
+            className="transform rounded-tr-md rounded-tl-md transition-transform duration-300 ease-in-out"
           />
         </div>
 
@@ -103,9 +103,9 @@ const GridItem = ({ imageSrc, title, description }: GridItemProps) => {
           </div>
 
           {/* Conditional Button Text */}
-          <button className="p-[3px] w-[40%] relative">
+          <button className="p-[3px] w-[50%] md:w-[40%] relative">
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500  to-purple-500 rounded-lg transition-all duration-300 group-hover:from-purple-500 group-hover:via-purple-500 group-hover:to-purple-500" />
-            <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
+            <div className="md:px-8 py-1 md:py-2 bg-black rounded-[6px] text-center relative group transition duration-200 text-white hover:bg-transparent">
               {buttonText}
             </div>
           </button>

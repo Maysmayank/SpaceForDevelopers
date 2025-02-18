@@ -17,7 +17,7 @@ export const BackgroundLines = ({
   return (
     <div
       className={cn(
-        "h-[20rem] md:h-screen w-full bg-white dark:bg-transparent",
+        "h-[30rem] md:h-[100vh] mt-16 bg-transparent w-full",
         className
       )}
     >

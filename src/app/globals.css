@@ -47,6 +47,29 @@
   font-weight: 900;
   font-style: normal;
 }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background:black; /* Light gray background */
+  z-index: -1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6; /* Tailwind Blue-500 */
+  border-radius: 10px;
+  z-index: -1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb; /* Tailwind Blue-600 */
+  z-index: 10;
+
+}
+
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

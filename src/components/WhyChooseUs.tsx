@@ -22,11 +22,11 @@ const blogContents = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-10 mt-10 px-8  text-center transition-all duration-1000 ease-in-out hover:bg-[#141414] text-white">
+    <section className="py-10 mt-10 px-8  text-center transition-all duration-1000 ease-in-out  text-white">
       <h2 className="text-4xl font-bold mb-16">Why Choose Us?</h2>
 
       {/* Grid layout with responsiveness */}
-      <div className="grid max-w-[50%]  md:max-w-[80%] m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-center">
+      <div className="grid  gap-16 md:gap-0 md:max-w-[80%] m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-center">
         {blogContents.map((blog, index) => (
           <Card key={index} blogContent={blog} />
         ))}
@@ -37,7 +37,7 @@ const WhyChooseUs = () => {
 
 export function Card({ blogContent }: { blogContent: any }) {
   return (
-    <div className="transition-transform w-[360px]  transform hover:scale-105">
+    <div className="transition-transform min-h-[300px] md:w-[360px]  transform hover:scale-105">
       {/* Outer container with smooth gradient border and soft glow */}
       <div className="relative p-[3px] rounded-2xl bg-gradient-to-r from-yellow-400 via-orange-500 via-pink-500 via-red-500 to-blue-500 animate-gradient-spin shadow-glow opacity-0 animate-fade-in">
         {/* Inner card */}
@@ -49,7 +49,7 @@ export function Card({ blogContent }: { blogContent: any }) {
               alt="thumbnail"
               height={400}
               width={400}
-              className="transition-transform duration-500 transform md:max-h-[290px] group-hover:scale-90"
+              className="transition-transform duration-500 transform h-[230px] md:max-h-[290px] group-hover:scale-90"
             />
           </div>
 

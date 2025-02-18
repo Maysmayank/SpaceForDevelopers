@@ -55,8 +55,10 @@ export default function Page() {
       <HeroSection />
       </div>
      
-      <div className='bg-[#13161a] flex flex-col gap-16 relative '>
+      <div className='bg-[#13161a] flex flex-col relative '>
         {/* Attach the ref to WhyChooseUs */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-black/40 backdrop-blur-lg shadow-[0_0_40px_20px_rgba(0,0,0,0.9)]"></div>
+
         <WhyChooseUs />
         <AnimatedTestimonialsDemo/>
         {/* <div ref={whyChooseUsRef}></div> */}

@@ -5,10 +5,9 @@ import { FaLinkedin, FaInstagram, FaTwitter, FaEnvelope } from "react-icons/fa";
 
 const OurPurpose = () => {
   return (
-    <div id='about' className="mx-4 my-20 md:mx-16">
+    <div id='about' className="mx-4 my-10 md:my-20 md:mx-16">
       {/* Our Purpose Section */}
-      <h1 className='block md:hidden text-6xl text-bold text-center'>Our Mission</h1>
-      <div className="relative section  grid md:grid-cols-2 md:pt-0 pt-10" id="our-purpose">
+      <div className="relative section  grid md:grid-cols-2 " id="our-purpose">
         {/* Left - Description */}
       
         <div className="  flex flex-col md:pl-10 p-4 bg-[#f5f5f5] md:py-5 gap-8  md:gap-10 justify-evenly text-black">
@@ -59,7 +58,7 @@ const OurPurpose = () => {
             width={500}
             height={400}
             
-            className="h-full w-full rounded-lg shadow-lg"
+            className="h-full w-full shadow-lg"
           />
 
         </div>

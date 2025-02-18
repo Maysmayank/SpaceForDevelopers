@@ -10,8 +10,8 @@ export default function Page() {
 //   }
 
   return (
-    <div className="flex flex-col items-center justify-center bg-[#37424d] pt-20 ">
-      <AboutMe/>
+    <div className="flex flex-col items-center justify-center bg-black pt-20 ">
+      {/* <AboutMe/> */}
       <ContactForm/>
     </div>
   );

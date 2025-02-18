@@ -30,7 +30,7 @@ export default function Page() {
         </p>
       </div>
       
-      <div className='bg-white'>
+      <div className=''>
       <WorldMap
     
     dots={[

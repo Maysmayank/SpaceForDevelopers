@@ -73,7 +73,7 @@ export function OurStoryValues() {
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-2xl font-normal mb-4">
             Upcoming Updates we are continuously working on
           </p>
-          <div className="mb-8 text-xl">
+          <div className="mb-8 flex-col flex gap-4  text-xl">
             <div className="flex gap-2  items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-xl">
             ✅ Discussion Forums: Engage in topic-specific conversations, share insights, and learn from peers.
 
