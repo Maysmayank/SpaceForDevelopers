@@ -2,10 +2,11 @@ import Footer from "@/components/Footer";
 import "../../../app/globals.css";
 
 export const metadata = {
-  title: "Contact Page",
-  description: "Layout for the contact page",
+  title: "SpaceForDevelopers",
+  icons: {
+    icon: "/LOGO2.jpg",
+  },
 };
-
 export default function ContactLayout({ children }) {
   return (
     <html lang="en">

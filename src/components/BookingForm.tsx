@@ -16,21 +16,55 @@ const BookingForm = () => {
     );
   };
 
-  const onSubmit = async (data: any) => {
-    const formData = { ...data, learningGoals: selectedGoals, sessionMode: selectedSessionMode };
-    
-    const response = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+  const onSubmit = async (data:any) => {
+    // Add dynamic data to your formData object
+    const formData = { 
+        ...data, 
+        learningGoals: selectedGoals, 
+        sessionMode: selectedSessionMode 
+    };
 
-    if (response.ok) {
-      alert('Booking successful! A confirmation email has been sent.');
-    } else {
-      alert('There was an error with your booking. Please try again.');
+    // Structure the data for Google Sheets
+    const sheetData = [
+      [
+        formData.fullName,  // fullName
+        formData.email,     // email
+        formData.phoneNumber, // phoneNumber
+        formData.experienceLevel, // experienceLevel
+        formData.preferredDate,  // preferredDate
+        formData.preferredTime,  // preferredTime
+        formData.learningGoals.join(", "), // learningGoals (concatenate if multiple)
+        formData.sessionMode, // sessionMode
+        new Date().toLocaleString()     // Current date and time in local format
+      ]
+    ];
+
+    console.log(sheetData);
+    
+    // Prepare the request
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const requestOptions: RequestInit = {
+        method: "POST",
+        headers: myHeaders,
+        body: JSON.stringify(sheetData), // Send the structured data
+        redirect: "follow" // Ensure this is explicitly typed as "follow"
+    };
+
+    try {
+        const response = await fetch("https://v1.nocodeapi.com/spacedev/google_sheets/DVrGMjikwrFeulCO?tabId=Sheet1", requestOptions);
+        const result = await response.json();
+
+        if (response.ok) {
+            console.log("Successfully written to Google Sheets:", result);
+        } else {
+            console.error("Error writing to Google Sheets:", result.info);
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
-  };
+};
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="md:py-20 relative text-black md:w-[90%] border flex flex-col gap-4 mx-auto px-10">

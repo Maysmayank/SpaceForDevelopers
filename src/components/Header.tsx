@@ -1,10 +1,18 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { HiMenu, HiX } from 'react-icons/hi'; // Import hamburger and close icons
+import { FaRegAddressCard, FaRegClipboard, FaRegComments, FaUsers } from 'react-icons/fa'; // Import icons for each link
+import { div } from 'motion/react-client';
+import { X } from 'lucide-react';
+import Image from 'next/image';
 
-const Header = ({ openModal }: any) => {
+const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to control sidebar visibility
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,45 +25,46 @@ const Header = ({ openModal }: any) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  // Sidebar links array with icons
+  const navLinks = [
+    { href: '#about', label: 'About', icon: <FaRegAddressCard size={20} /> },
+    { href: '#courses', label: 'Courses', icon: <FaRegClipboard size={20} /> },
+    { href: '/contact', label: 'Contact', icon: <FaRegComments size={20} /> },
+    { href: '/community', label: 'Community', icon: <FaUsers size={20} /> },
+  ];
+
   return (
-    <nav
-      className={`fixed pt-2 md:pt-4 top-0 left-0 w-full z-[1000] transition-all duration-300
-      bg-[#21262c] bg-opacity-60 backdrop-blur-md`}
-    >
+    <nav className={`fixed pt-2 md:pt-4 top-0 left-0 w-full z-[1000] transition-all duration-300 bg-[#21262c] bg-opacity-60 backdrop-blur-md`}>
       <div className="container mx-auto h-[60px] flex justify-between px-10 md:px-20 items-center relative">
+        {/* Hamburger Icon - Aligned to the right */}
+        <div className="absolute right-5 md:hidden">
+          <button onClick={toggleSidebar} className="text-white text-2xl">
+            {isSidebarOpen ? <HiX size={40} /> : <HiMenu size={40} />} {/* Toggle icon */}
+          </button>
+        </div>
+
         {/* Logo */}
-        <h1 className="text-xl md:text-3xl text-white italic font-extrabold knewave-regular">
+        <h1 className="text-xl md:text-3xl flex text-white italic font-extrabold knewave-regular">
+          {/* <Image src={'/LOGO2.jpg'} alt=' ' width={40} height={200}/> */}
           Space for Developers
         </h1>
 
-        {/* Navigation Links */}
-        <ul className="hidden md:flex   font-gilroy items-center font-bold  space-x-6 text-bold text-md gap-3">
-          <li>
-            <Link href="#about" className="hover:text-gray-400 hover:scale-105 text-white">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="#courses" className="hover:text-gray-400 hover:scale-110 text-white">
-              Courses
-            </Link>
-          </li>
-
-          <li>
-            <Link href="/contact" className="hover:text-gray-400 text-white">
-              Contact
-            </Link>
-          </li>
-          
-          <li>
-            <Link href="/community" className="hover:text-gray-400 text-white">
-              <ShimmerButton label='Community'/>
-            </Link>
-          </li>
-
+        {/* Navigation Links (Desktop) */}
+        <ul className="hidden md:flex font-gilroy items-center font-bold space-x-6 text-bold text-md gap-3">
+          {navLinks.map(({ href, label }, index) => (
+            <li key={index}>
+              <Link href={href} className="hover:text-gray-400 hover:scale-105 text-white">
+                {label}
+              </Link>
+            </li>
+          ))}
           <button
-            onClick={openModal}
             className="bg-blue-600 font-sans hover:bg-blue-700 px-4 py-2 rounded-md text-white"
+            onClick={() => router.push("/signup")}
           >
             Sign Up For Free
           </button>
@@ -70,12 +79,43 @@ const Header = ({ openModal }: any) => {
           }}
         />
       </div>
+
+      {/* Sidebar (Mobile) */}
+      {isSidebarOpen && (
+        <div>
+          <div
+          className="fixed md:hidden top-0 right-0 w-64 bg-gradient-to-b from-[#21262c] via-[#1c1f24] to-[#21262c] text-white h-screen p-6 transform transition-transform duration-300 z-[999] shadow-lg rounded-l-lg"
+        >
+          <div className='absolute right-6' onClick={()=>setIsSidebarOpen(false)}><X/></div>
+          <ul className="space-y-6 mt-28 flex flex-col  h-screen">
+            <div className='flex flex-col flex-grow gap-10'>
+            {navLinks.map(({ href, label, icon }, index) => (
+              <li key={index} className="flex items-center space-x-3">
+                <Link href={href} className="block hover:text-gray-400 text-white text-lg flex items-center space-x-3">
+                  {icon}
+                  <span>{label}</span>
+                </Link>
+              </li>
+            ))}
+            </div>
+
+            <li className='flex-1'>
+              <button
+                className="bg-blue-600 font-sans hover:bg-blue-700 px-4 py-2 rounded-md text-white w-full"
+                onClick={() => router.push("/signup")}
+              >
+                Sign Up For Free
+              </button>
+            </li>
+          </ul>
+        </div>
+        </div>
+      )}
     </nav>
   );
 };
 
 export default Header;
-
 
 interface ShimmerButtonProps {
   label: string;
@@ -93,4 +133,3 @@ const ShimmerButton: React.FC<ShimmerButtonProps> = ({ label, onClick, className
     </button>
   );
 };
-

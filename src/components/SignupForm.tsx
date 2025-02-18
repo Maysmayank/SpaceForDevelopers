@@ -1,122 +1,105 @@
 "use client";
 import React, { useState } from "react";
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
-import { X } from "lucide-react";
-import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-export function SignupForm({ cancel }: any) {
-  const [isSignup, setIsSignup] = useState(true); // State to toggle between Signup and Login form
+export function SignupForm() {
+  const [isSignup, setIsSignup] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const router=useRouter();
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(isSignup ? "Signup Form Submitted" : "Login Form Submitted");
+  // Handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleToggleForm = () => {
-    setIsSignup(!isSignup); // Toggle between signup and login
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const endpoint = isSignup ? "http://localhost:9000/api/v1/user/signup" : "http://localhost:9000/api/v1/user/login"; // Change this to your actual API endpoint
+      const response = await axios.post(endpoint, formData);
+
+      console.log("Response:", response.data);
+      alert(isSignup ? "Signup Successful!" : "Login Successful!");
+      isSignup? router.push('/login'):''
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong! Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="max-w-xl max-h-[99%]  relative w-full mx-auto rounded-none md:rounded-2xl p-4 md:px-15 md:p-8 shadow-lg bg-white mt-2 dark:bg-black">
-      <div
-        className="absolute top-6 p-2 right-6 text-black bg-white cursor-pointer"
-        onClick={cancel}
-      >
-        <X className="text-black" />
-      </div>
-
-      <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        {isSignup ? "Space For Developers - Signup" : "Space For Developers - Login"}
+    <div className="md:max-w-md mt-40 md:mt-0 w-full  md:max-h-full  bg-[#eeeeee] text-black shadow-xl border border-gray-300 p-6  text-center">
+      <h2 className="text-2xl font-bold">
+        {isSignup ? "Sign Up" : "Welcome Back!"}
       </h2>
-    
 
-      <form className="my-8 text-black" onSubmit={handleSubmit}>
-        {isSignup ? (
-          <>
-            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-              <InputContainer
-                label="UserName"
-                id="UserName"
-                placeholder="UserName"
-                type="text"
-              />
-            </div>
-
-            <InputContainer
-              label="Gmail Address"
-              id="email"
-              placeholder="projectmayhem@fc.com"
-              type="text"
-            />
-            <InputContainer
-              label="Password"
-              id="password"
-              placeholder="••••••••"
-              type="password"
-            />
-            <InputContainer label="Phone Number" type="tel" />
-            <button
-              className="bg-black text-white w-full rounded-md h-12 font-medium mt-10"
-              type="submit"
-            >
-              Sign up &rarr;
-            </button>
-          </>
-        ) : (
-          <>
-            <InputContainer
-              label="Gmail Address"
-              id="email"
-              placeholder="projectmayhem@fc.com"
-              type="text"
-            />
-            <InputContainer
-              label="Password"
-              id="password"
-              placeholder="••••••••"
-              type="password"
-            />
-            <button
-              className="bg-black text-white w-full rounded-md h-12 font-medium mt-10"
-              type="submit"
-            >
-              Login &rarr;
-            </button>
-          </>
+      <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
+        {/* Render username input only during signup */}
+        {isSignup && (
+          <InputContainer label="Username" name="username" placeholder="Enter your username" type="text" onChange={handleChange} />
         )}
-        <p
-          className="text-white mt-4 cursor-pointer"
-          onClick={handleToggleForm}
+        
+        <InputContainer label="Email" name="email" placeholder="your@email.com" type="email" onChange={handleChange} />
+        
+        <InputContainer label="Password" name="password" placeholder="********" type="password" onChange={handleChange} />
+        
+       
+
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full py-3 mt-4 text-white font-semibold rounded-md transition ${
+            loading ? "bg-gray-400 cursor-not-allowed" : "bg-black hover:bg-gray-800"
+          }`}
         >
-          {isSignup
-            ? "Already have an Account? Login"
-            : "Don't have an Account? Signup"}
-        </p>
+          {loading ? "Processing..." : isSignup ? "Sign Up" : "Login"}
+        </button>
       </form>
 
-      <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-      <div className="flex flex-col space-y-4">
-        <OAuthButton icon={<IconBrandGithub size={20} />} label="GitHub" />
-        <OAuthButton icon={<IconBrandGoogle size={20} />} label="Google" />
+      <p
+        className="mt-4 text-sm text-gray-600 cursor-pointer hover:text-black transition"
+        onClick={() => setIsSignup(!isSignup)}
+      >
+        {isSignup
+          ? "Already have an account? Login"
+          : "Don't have an account? Sign up"}
+      </p>
+
+      <div className="my-6 border-t border-gray-300"></div>
+
+      <div className="flex flex-col space-y-3">
+        <OAuthButton icon={<IconBrandGithub size={20} />} label="Continue with GitHub" />
+        <OAuthButton icon={<IconBrandGoogle size={20} />} label="Continue with Google" />
       </div>
     </div>
   );
 }
 
-const InputContainer = ({ label, id, placeholder, type }: any) => {
+const InputContainer = ({ label, name, placeholder, type, onChange }: any) => {
   return (
-    <div className="flex flex-col space-y-2 w-full mb-4">
-      <label
-        htmlFor={id}
-        className="text-sm font-medium text-neutral-700 dark:text-neutral-300"
-      >
+    <div className="flex flex-col space-y-2">
+      <label htmlFor={name} className="text-sm text-left font-medium text-black">
         {label}
       </label>
       <input
-        id={id}
+        id={name}
+        name={name}
         placeholder={placeholder}
         type={type}
-        className="border rounded-md p-2"
+        onChange={onChange}
+        className="p-3 bg-gray-100 border border-gray-300 rounded-md text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600 transition"
       />
     </div>
   );
@@ -124,17 +107,9 @@ const InputContainer = ({ label, id, placeholder, type }: any) => {
 
 const OAuthButton = ({ icon, label }: any) => {
   return (
-    <button
-      className={`flex items-center space-x-2 justify-center px-4 w-full rounded-md h-10 font-medium shadow-md ${
-        label === "GitHub"
-          ? "bg-black text-white"
-          : "bg-[#4285F4] text-white"
-      }`}
-    >
+    <button className="flex items-center justify-center space-x-2 py-2 w-full rounded-md font-medium shadow-md bg-gray-100 text-black hover:bg-gray-200 transition">
       {icon}
-      <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-        {label}
-      </span>
+      <span className="text-sm">{label}</span>
     </button>
   );
 };

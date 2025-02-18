@@ -1,3 +1,4 @@
+import { Geist, Geist_Mono } from "next/font/google";
 import "../../app/globals.css";
 import StarryBackground from "@/components/starryBackground";
 import Footer from "@/components/Footer";
@@ -11,18 +12,13 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
-
-
+export default function AuthLayout({ children }:any) {
   return (
     <html lang="en">
       <body
       className="antialiased">
-        <StarryBackground/>
-          <Header/>
 
           {children}
-        <Footer />
       </body>
     </html>
   );

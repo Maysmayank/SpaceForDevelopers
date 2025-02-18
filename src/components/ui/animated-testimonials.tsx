@@ -41,10 +41,10 @@ export default function AnimatedTestimonials({
   const randomRotateY = () => Math.floor(Math.random() * 21) - 10;
 
   return (
-    <div className="max-w-sm md:max-w-6xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12 md:py-16 pt-14">
+    <div className="max-w-sm  md:max-w-6xl mx-auto antialiased font-sans px-4 md:px-2  md:py-16 pt-14">
       <div className="relative grid grid-cols-1 md:grid-cols-2 gap-20">
         <div>
-          <div className="relative  h-40 md:h-80 w-full">
+          <div className="relative  h-40 md:mt-10 md:h-80 w-full">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
@@ -83,14 +83,16 @@ export default function AnimatedTestimonials({
                     width={500}
                     height={500}
                     draggable={false}
-                    className="md:h-full h-[200px] md:w-full rounded-3xl object-cover object-center"
+                    className="md:h-full object-cover h-[200px] md:w-full rounded-3xl  object-center"
                   />
                 </motion.div>
               ))}
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex mx-4 justify-between flex-col py-4">
+
+
+        <div className="flex mx-4  md:w-[120%] justify-between flex-col md:gap-10 py-4">
           <motion.div
             key={active}
             initial={{ y: 20, opacity: 0 }}
@@ -129,6 +131,7 @@ export default function AnimatedTestimonials({
             >
               <IconArrowLeft className="  h-12 md:h-16 w-16 text-black transition-transform duration-200 dark:text-neutral-400 hover:scale-125 hover:text-orange-500" />
             </button>
+            
             <button
               onClick={handleNext}
               className="transition-transform duration-300 hover:scale-125"

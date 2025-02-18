@@ -21,7 +21,7 @@ function ContactForm() {
       {/* Background Image with Centered Text */}
       <div className='relative max-h-[400px] w-full overflow-hidden'>
         <Image
-          src='/images/spacecontact.jpg'
+          src='/images/aboutme.jpg'
           alt='Contact'
           width={400}
           height={400}
@@ -35,7 +35,7 @@ function ContactForm() {
       </div>
 
       {/* Flex Container for Image and Description */}
-      <div className='flex border'>
+      <div className='flex border bg-transparent'>
         {/* Left Side: Image */}
         <div className='w-1/2'>
           <Image
@@ -48,7 +48,7 @@ function ContactForm() {
         </div>
 
         {/* Right Side: Description */}
-        <div className='w-1/2 flex  items-center justify-center  mr-10 bg-opacity-50'>
+        <div className='w-1/2 flex  items-center justify-center   mr-10 bg-opacity-50'>
           <div className='text-left flex flex-col gap-8  text-white items-start  px-10'>
             <h1 className="text-4xl font-bold ">About me</h1>
             <p className='text-left text-xl'>

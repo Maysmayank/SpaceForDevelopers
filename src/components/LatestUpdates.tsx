@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Box, Lock, Search, Settings, Sparkles } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { useRouter } from 'next/navigation';
 
 const LatestUpdates = () => {
   return (
@@ -22,6 +23,7 @@ export function GlowingEffectDemoSecond() {
     <ul className="grid grid-cols-1 w-full gap-10 md:grid-cols-2 md:grid-rows-2 ">
       <GridItem
         imageSrc={'/images/python.jpg'}
+        path='/formPage'
         title="Python Programming Language"
         description="Python is easy to learn with simple, readable syntax, making it perfect for building strong logic from an early age. It lets students create cool projects like games and AI quickly, while boosting problem-solving skills. Used by tech giants like Google and NASA, Python opens doors to future careers in tech.
 "
@@ -30,18 +32,24 @@ export function GlowingEffectDemoSecond() {
       <GridItem
         imageSrc={'/images/webdev.jpg'}
         title="Web Development"
+        path='/formPage'
+
         description="In today’s digital world, *web development* is a must-have skill, powering everything from social media to online businesses. It helps students from *9th grade to college* build strong *problem-solving skills* while creating real-world projects like websites and apps. With endless career opportunities in tech, web development boosts *creativity* and prepares students for a *future-proof career. Start building your ideas today with our **web development course*! 🚀"
       />
  
       <GridItem
         imageSrc={'/images/workshop.jpeg'}
         title="Upcoming Workshop"
+        path='/formPage'
+
         description="Welcome to our Interactive Workshops! Here, we offer hands-on learning experiences designed to help students and enthusiasts build practical skills in coding, technology, and more. Whether you're a beginner or looking to enhance your knowledge, our workshops cover a wide range of topics, including Python programming, web development, AI, and beyond. Join us for expert-led sessions, real-world projects, and collaborative learning that will empower you to bring your ideas to life. Don't just learn—create, innovate, and grow with our dynamic workshops!"
       />
  
       <GridItem
         imageSrc={'/news.jpg'}
         title="News and Updates"
+        path='/formPage'
+
         description="Stay up-to-date with the latest trends in tech and all things related to Space for Developers! Here, we’ll share exciting news, industry insights, and updates on our upcoming events, workshops, and initiatives. Whether it's the newest tech breakthroughs or developments within our community, this is your go-to space for staying informed and inspired."
       />
  
@@ -54,11 +62,13 @@ interface GridItemProps {
   imageSrc: string;
   title: string;
   description: React.ReactNode;
+  path:string;
 }
  
 
-const GridItem = ({ imageSrc, title, description }: GridItemProps) => {
-  // Determine button text based on title
+const GridItem = ({ imageSrc, title, description ,path}: GridItemProps) => {
+  let router=useRouter();
+
   let buttonText = "Register Now!";
   if (title === "Upcoming Workshop") {
     buttonText = "Apply Now";
@@ -103,7 +113,7 @@ const GridItem = ({ imageSrc, title, description }: GridItemProps) => {
           </div>
 
           {/* Conditional Button Text */}
-          <button className="p-[3px] w-[50%] md:w-[40%] relative">
+          <button className="p-[3px] w-[50%] md:w-[40%] relative" onClick={()=>router.push(path)}>
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500  to-purple-500 rounded-lg transition-all duration-300 group-hover:from-purple-500 group-hover:via-purple-500 group-hover:to-purple-500" />
             <div className="md:px-8 py-1 md:py-2 bg-black rounded-[6px] text-center relative group transition duration-200 text-white hover:bg-transparent">
               {buttonText}
