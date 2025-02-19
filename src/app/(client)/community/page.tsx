@@ -3,11 +3,13 @@
 import React from 'react'
 import { motion } from "motion/react";
 import {WorldMap} from "../../../components/world-map";
+import { AuthProvider } from '../../../../utils/AuthProvider';
 
 
 export default function Page() {
   return (
-    <div className=" py-40 dark:bg-black bg-black w-full">
+    <AuthProvider>
+<div className=" py-40 mt-10 dark:bg-black bg-black w-full">
       <div className="max-w-7xl mx-auto text-center">
         <p className="font-bold text-xl md:text-4xl dark:text-white text-black">
           Stay{"  "}
@@ -69,5 +71,8 @@ export default function Page() {
 
       </div>
     </div>
-  );
+
+
+    </AuthProvider>
+  )   
 }

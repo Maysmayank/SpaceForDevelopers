@@ -62,11 +62,17 @@ const Header = () => {
         {/* Navigation Links (Desktop) */}
         <ul className="hidden md:flex font-gilroy items-center font-bold space-x-6 text-bold text-md gap-3">
           {navLinks.map(({ href, label }, index) => (
-            <li key={index}>
-              <Link href={href} className="hover:text-gray-400 hover:scale-105 text-white">
-                {label}
-              </Link>
-            </li>
+            label === "Community" ? (
+              <li key={index}>
+                <ShimmerButton label={label} onClick={()=>router.push(href)} />
+              </li>
+            ) : (
+              <li key={index}>
+                <Link href={href} className="hover:text-gray-400 hover:scale-105 text-white">
+                  {label}
+                </Link>
+              </li>
+            )
           ))}
           {loading ? (
             <p className="text-white">Loading...</p>
@@ -163,7 +169,7 @@ interface ShimmerButtonProps {
 const ShimmerButton: React.FC<ShimmerButtonProps> = ({ label, onClick, className }) => {
   return (
     <button
-      className={`inline-flex h-12 items-center justify-center rounded-md border border-slate-800 px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 shimmer-bg ${className}`}
+      className={`inline-flex h-12 items-center justify-center rounded-md border border-slate-800 px-6 font-medium text-slate-400 transition-colors focus:outline-none  shimmer-bg ${className}`}
       onClick={onClick}
     >
       {label}

@@ -92,7 +92,7 @@ export default function AnimatedTestimonials({
         </div>
 
 
-        <div className="flex mx-4  md:w-[120%] justify-between flex-col md:gap-10 py-4">
+        <div className="flex mx-4  md:w-[120%] justify-between flex-col-reverse  md:flex-col md:gap-10  md:py-4">
           <motion.div
             key={active}
             initial={{ y: 20, opacity: 0 }}
@@ -124,7 +124,7 @@ export default function AnimatedTestimonials({
               ))}
             </motion.p>
           </motion.div>
-          <div className="flex gap-4 pt-12 md:pt-0">
+          <div className="flex gap-4 pt-2 pb-10 md:pt-12  ">
             <button
               onClick={handlePrev}
               className=" "

@@ -96,8 +96,7 @@ const GridItem = ({ imageSrc, title, description ,path}: GridItemProps) => {
             alt="image"
             src={imageSrc}
             layout="fill"
-            objectFit="cover"
-            className="transform rounded-tr-md rounded-tl-md transition-transform duration-300 ease-in-out"
+            className="transform object-cover rounded-tr-md rounded-tl-md transition-transform duration-300 ease-in-out"
           />
         </div>
 

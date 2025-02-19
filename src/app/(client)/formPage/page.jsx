@@ -9,9 +9,9 @@ import { Phone } from 'lucide-react'
 
 function page() {
   return (
-    <div className='bg-[#f2f4f6] border grid md:grid-cols-2'>
+    <div className='bg-[#f2f4f6] w-[100%] mt-16 md:mt-20 border grid md:grid-cols-2'>
       <BookingForm />
-      <div className=' flex items-center  my-20 justify-evenly flex-col'>
+      <div className='hidden md:flex items-center  my-20 justify-evenly flex-col'>
         <Image height={500} width={500} alt='contact' src={'/images/contact.png'}></Image>
         <div className='flex flex-col gap-4 text-black w-[60%] font-extrabold'>
           <p className='flex gap-3 items-center'>  <a href="mailto:your@email.com">

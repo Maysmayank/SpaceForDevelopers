@@ -1,18 +1,19 @@
 import AboutMe from '@/components/AboutMe';
 import ContactForm from '@/components/ContactForm';
 import React from 'react';
+import { AuthProvider } from '../../../../utils/AuthProvider';
 
 export default function Page() {
-//   async function handelSubmit(event) {
-//     event.preventDefault(); // Prevent default form submission behavior
-//     console.log("Form submitted!");
-//     // Perform additional logic, such as sending data to the backend
-//   }
+
 
   return (
+    <AuthProvider>
+
+    
     <div className="flex flex-col items-center justify-center bg-black pt-20 ">
       {/* <AboutMe/> */}
       <ContactForm/>
     </div>
+    </AuthProvider>
   );
 }
