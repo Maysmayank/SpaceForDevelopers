@@ -7,8 +7,9 @@ const sessionModes = ["Online (Zoom/Google Meet)", "In-Person (if applicable)"];
 
 const BookingForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
+  const [selectedGoals, setSelectedGoals] = useState<string[]>(["not mentioned"]);
   const [selectedSessionMode, setSelectedSessionMode] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const toggleGoal = (goal: string) => {
     setSelectedGoals((prev) =>
@@ -17,39 +18,36 @@ const BookingForm = () => {
   };
 
   const onSubmit = async (data:any) => {
-    // Add dynamic data to your formData object
+    setSuccessMessage(null); // Reset success message on new submission
+    
     const formData = { 
         ...data, 
         learningGoals: selectedGoals, 
         sessionMode: selectedSessionMode 
     };
 
-    // Structure the data for Google Sheets
     const sheetData = [
       [
-        formData.fullName,  // fullName
-        formData.email,     // email
-        formData.phoneNumber, // phoneNumber
-        formData.experienceLevel, // experienceLevel
-        formData.preferredDate,  // preferredDate
-        formData.preferredTime,  // preferredTime
-        formData.learningGoals.join(", "), // learningGoals (concatenate if multiple)
-        formData.sessionMode, // sessionMode
-        new Date().toLocaleString()     // Current date and time in local format
+        formData.fullName,  
+        formData.email,     
+        formData.phoneNumber, 
+        formData.experienceLevel, 
+        formData.preferredDate,  
+        formData.preferredTime,  
+        formData.learningGoals.join(", "), 
+        formData.sessionMode, 
+        new Date().toLocaleString()     
       ]
     ];
 
-    console.log(sheetData);
-    
-    // Prepare the request
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     const requestOptions: RequestInit = {
         method: "POST",
         headers: myHeaders,
-        body: JSON.stringify(sheetData), // Send the structured data
-        redirect: "follow" // Ensure this is explicitly typed as "follow"
+        body: JSON.stringify(sheetData),
+        redirect: "follow"
     };
 
     try {
@@ -58,13 +56,14 @@ const BookingForm = () => {
 
         if (response.ok) {
             console.log("Successfully written to Google Sheets:", result);
+            setSuccessMessage("Your form has been submitted successfully!");
         } else {
             console.error("Error writing to Google Sheets:", result.info);
         }
     } catch (error) {
         console.error('Error:', error);
     }
-};
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="md:py-20 relative text-black md:w-[90%] border flex flex-col gap-4 mx-auto px-10">
@@ -160,6 +159,9 @@ const BookingForm = () => {
       <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded mt-4 hover:bg-blue-700">
         Book Session
       </button>
+
+      {/* Success Message */}
+      {<p className="mt-4 text-green-600 font-semibold">{successMessage}</p>}
     </form>
   );
 };

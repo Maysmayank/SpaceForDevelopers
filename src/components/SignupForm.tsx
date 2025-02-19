@@ -18,19 +18,22 @@ export function SignupForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  console.log(process.env.NEXT_PUBLIC_API_URL);
+  
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-
+    console.log(formData);
+    
     try {
-      const endpoint = isSignup ? "http://localhost:9000/api/v1/user/signup" : "http://localhost:9000/api/v1/user/login"; // Change this to your actual API endpoint
+      const endpoint = isSignup ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/signup` : `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/login`; // Change this to your actual API endpoint
       const response = await axios.post(endpoint, formData);
-
+      console.log(response);
+      
       console.log("Response:", response.data);
       alert(isSignup ? "Signup Successful!" : "Login Successful!");
-      isSignup? router.push('/login'):''
+      isSignup? setIsSignup(false) :router.push('/')
     } catch (error) {
       console.error("Error:", error);
       alert("Something went wrong! Please try again.");
