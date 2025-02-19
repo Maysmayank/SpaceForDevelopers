@@ -26,7 +26,7 @@ const WhyChooseUs = () => {
       <h2 className="text-4xl font-bold mb-16">Why Choose Us?</h2>
 
       {/* Grid layout with responsiveness */}
-      <div className="grid  gap-16 md:gap-0 md:max-w-[80%] m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-center">
+      <div className="grid  gap-16 md:gap-12 md:max-w-[90%] m-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-center">
         {blogContents.map((blog, index) => (
           <Card key={index} blogContent={blog} />
         ))}
