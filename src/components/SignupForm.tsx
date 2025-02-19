@@ -28,17 +28,18 @@ export function SignupForm() {
     
     try {
       const endpoint = isSignup ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/signup` : `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/login`; // Change this to your actual API endpoint
-      const response = await axios.post(endpoint, formData);
+      const response = await axios.post(endpoint, formData ,  { withCredentials: true});
       console.log(response);
       
       console.log("Response:", response.data);
       alert(isSignup ? "Signup Successful!" : "Login Successful!");
-      isSignup? setIsSignup(false) :router.push('/')
+     
     } catch (error) {
       console.error("Error:", error);
       alert("Something went wrong! Please try again.");
     } finally {
       setLoading(false);
+      isSignup? setIsSignup(false) :router.push('/')
     }
   };
 

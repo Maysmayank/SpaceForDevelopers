@@ -2,6 +2,7 @@ import "../../app/globals.css";
 import StarryBackground from "@/components/starryBackground";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import {AuthProvider} from "../../../utils/AuthProvider";
 
 
 export const metadata = {
@@ -19,10 +20,11 @@ export default function RootLayout({ children }) {
       <body
       className="antialiased">
         <StarryBackground/>
+        <AuthProvider>
           <Header/>
-
           {children}
         <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

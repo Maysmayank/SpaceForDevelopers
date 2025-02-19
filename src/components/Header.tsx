@@ -5,14 +5,19 @@ import { useRouter } from 'next/navigation';
 import { HiMenu, HiX } from 'react-icons/hi'; // Import hamburger and close icons
 import { FaRegAddressCard, FaRegClipboard, FaRegComments, FaUsers } from 'react-icons/fa'; // Import icons for each link
 import { div } from 'motion/react-client';
-import { X } from 'lucide-react';
+import { LogOut, X } from 'lucide-react';
 import Image from 'next/image';
+import { useAuth } from '../../utils/AuthProvider';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to control sidebar visibility
+  const { user, loading, logout } = useAuth()
+  const [showLogout, setshowLogout] = useState(false)
   const router = useRouter();
+  // console.log("heafer", user);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +40,7 @@ const Header = () => {
     { href: '#courses', label: 'Courses', icon: <FaRegClipboard size={20} /> },
     { href: '/contact', label: 'Contact', icon: <FaRegComments size={20} /> },
     { href: '/community', label: 'Community', icon: <FaUsers size={20} /> },
+
   ];
 
   return (
@@ -62,12 +68,32 @@ const Header = () => {
               </Link>
             </li>
           ))}
-          <button
-            className="bg-blue-600 font-sans hover:bg-blue-700 px-4 py-2 rounded-md text-white"
-            onClick={() => router.push("/signup")}
-          >
-            Sign Up For Free
-          </button>
+          {loading ? (
+            <p className="text-white">Loading...</p>
+          ) : user ? (
+            <div className="flex items-center space-x-4">
+              {/* Circular Avatar */}
+              <div onClick={() => setshowLogout(!showLogout)} className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg">
+                {user.name ? user.name[0].toUpperCase() : user.email[0].toUpperCase()}
+              </div>
+
+              {
+                showLogout && <div className='bg-red-500 absolute top-16 px-4 py-2 right-14 ' onClick={logout} >
+                  logout
+                </div>
+              }
+              {/* User Name or Email */}
+              {/* <span className="text-white">{user.name || user.email}</span> */}
+            </div>
+
+          ) : (
+            <button
+              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md text-white w-full"
+              onClick={() => router.push("/signup")}
+            >
+              Sign Up For Free
+            </button>
+          )}
         </ul>
 
         {/* Expanding Gradient Line */}
@@ -84,31 +110,42 @@ const Header = () => {
       {isSidebarOpen && (
         <div>
           <div
-          className="fixed md:hidden top-0 right-0 w-64 bg-gradient-to-b from-[#21262c] via-[#1c1f24] to-[#21262c] text-white h-screen p-6 transform transition-transform duration-300 z-[999] shadow-lg rounded-l-lg"
-        >
-          <div className='absolute right-6' onClick={()=>setIsSidebarOpen(false)}><X/></div>
-          <ul className="space-y-6 mt-28 flex flex-col  h-screen">
-            <div className='flex flex-col flex-grow gap-10'>
-            {navLinks.map(({ href, label, icon }, index) => (
-              <li key={index} className="flex items-center space-x-3">
-                <Link href={href} className="block hover:text-gray-400 text-white text-lg flex items-center space-x-3">
-                  {icon}
-                  <span>{label}</span>
-                </Link>
-              </li>
-            ))}
-            </div>
+            className="fixed md:hidden top-0 right-0 w-64 bg-gradient-to-b from-[#21262c] via-[#1c1f24] to-[#21262c] text-white h-screen p-6 transform transition-transform duration-300 z-[999] shadow-lg rounded-l-lg"
+          >
+            <div className='absolute right-6' onClick={() => setIsSidebarOpen(false)}><X /></div>
+            <ul className="space-y-6 mt-28 flex flex-col  h-screen">
+              <div className='flex flex-col flex-grow gap-10'>
+                {navLinks.map(({ href, label, icon }, index) => (
+                  <li key={index} className="flex items-center space-x-3">
+                    <Link href={href} className="block  hover:text-gray-400 text-white text-lg flex items-center space-x-3">
+                      {icon}
+                      <span>{label}</span>
+                    </Link>
+                  </li>
+                ))}
 
-            <li className='flex-1'>
-              <button
-                className="bg-blue-600 font-sans hover:bg-blue-700 px-4 py-2 rounded-md text-white w-full"
-                onClick={() => router.push("/signup")}
-              >
-                Sign Up For Free
-              </button>
-            </li>
-          </ul>
-        </div>
+                <div>
+                  {
+                    user !== null ? (
+                      <div className='flex gap-2 cursor-pointer' onClick={logout}>
+                        <LogOut /> Logout
+                      </div>
+                    ) : (
+                      <button
+                        className="bg-blue-600 hover:bg-blue-700 px-2 py-2 rounded-md text-white w-full"
+                        onClick={() => router.push("/signup")}
+                      >
+                        Sign Up For Free
+                      </button>
+                    )
+                  }
+
+                </div>
+              </div>
+
+
+            </ul>
+          </div>
         </div>
       )}
     </nav>
