@@ -39,6 +39,7 @@ export function SignupForm() {
       alert("Something went wrong! Please try again.");
     } finally {
       setLoading(false);
+      isSignup?"":router.push("/")
     }
   };
 

@@ -91,12 +91,13 @@ const GridItem = ({ imageSrc, title, description ,path}: GridItemProps) => {
         />
 
         {/* Image at the top */}
-        <div className="relative w-full h-[200px] md:h-[300px] overflow-hidden">
+        <div className="relative w-full bg-red-200 h-[200px] md:h-[300px] overflow-hidden">
           <Image
             alt="image"
             src={imageSrc}
-            layout="fill"
-            className="transform object-cover rounded-tr-md rounded-tl-md transition-transform duration-300 ease-in-out"
+          
+            fill
+            className=" h-full  w-full transform object-cover rounded-tr-md rounded-tl-md transition-transform duration-300 ease-in-out"
           />
         </div>
 
